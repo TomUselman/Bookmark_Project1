@@ -1,0 +1,34 @@
+<h1>Listing bookmarks</h1>
+<table>
+<tr>
+  <th>Name</th>
+  <th></th><th></th><th></th><th></th><th></th>
+  <th>User-Count</th>
+  <th></th><th></th><th></th><th></th><th></th>
+  <th>Bookmarked By</th>
+  <th></th><th></th><th></th><th></th><th></th>
+  <th>URL</th>
+  
+</tr>
+<% @bookmarks.each do |bookmark| %>
+  <tr>
+    <td><%= bookmark.Name %></td>
+    <td></td><td></td><td></td><td></td><td></td>
+    <td><%= "#{bookmark.users.count}"%></td>
+    <td></td><td></td><td></td><td></td><td></td>
+    <td><%= "#{get_all_users_for_bookmark(bookmark)}"%></td>
+    <td></td><td></td><td></td><td></td><td></td>
+    <td><%= "#{bookmark.URL}"%></td>
+    <td></td><td></td><td></td><td></td><td></td>
+    <% if current_user.username == bookmark.UserMade %>
+    <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+    <td></td><td></td>
+    <td><%= link_to 'Destroy', bookmark, :confirm => 'Are you sure?', :method => :delete %></td>
+        <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bookmark', new_bookmark_path %>
